@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+
+
+    <div id="todo" class="header">
+        <h2>To Do List</h2>
+        <label>
+        <input type="text" id="task" placeholder="Title...">
+        <input type="description" id="task" placeholder="Description...">
+        <input type="date" id="task" placeholder="Title...">
+    </label>
+        <span onclick="handleAddNew()" class="addBtn">Add New</span>
+      </div>
+      
+      <ul id="list">
+        <li>Task 1</li>
+        <li>Task 2</li>
+        <li>Task 3</li>
+        <li>Task 4</li>
+        <li>Task 5</li>
+        <li>Task 6</li>
+      </ul>
+
+      <script>
+// Create a delete button and append it to each list item
+var taskList = document.getElementsByTagName("li");
+var i;
+for (i = 0; i < taskList.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "delete";
+  span.appendChild(txt);
+  taskList[i].appendChild(span);
+}
+
+
+
+// Click on a delete button to hide the current list item
+var deleteBtns = document.getElementsByClassName("delete");
+var i;
+for (i = 0; i < deleteBtns.length; i++) {
+  deleteBtns[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+
+// Create a new list item when clicking on the "Add New" button
+function handleAddNew() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("task").value;
+  var textNode = document.createTextNode(inputValue);
+  li.appendChild(textNode);
+  if (inputValue === '') {
+    alert("Please input title");
+  } else {
+    document.getElementById("list").appendChild(li);
+  }
+  document.getElementById("task").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "delete";
+  span.appendChild(txt);
+  li.appendChild(span);
+}
+
+// Add date on new list item
+
+var input = document.getElementById("task")
+input.addEventListener("keyup", function(event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger Add New
+    handleAddNew()
+  }
+});
+
+
+      </script>
+</body>
+</html>
